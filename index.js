@@ -26,8 +26,8 @@ client.connect(err => {
   app.post("/addVolunteerActivity", (req, res) => {
       const volunteerActivity = req.body;
       activityCollection.insertOne(volunteerActivity)
-      .then(res => {
-          res.send(res.insertedCount > 0)
+      .then(result => {
+          res.send(res.insertedCount)
       })
   })
 
@@ -35,7 +35,7 @@ client.connect(err => {
   app.get('/volunteerActivity', (req, res) => {
       activityCollection.find({})
       .toArray((err, documents) => {
-          res.send(documents)
+          res.send(documents);
       })
   })
 
@@ -43,7 +43,7 @@ client.connect(err => {
       const register = req.body;
       registerListCollection.insertOne(register)
       .then(result => {
-          res.send(result.insertedCount > 0)
+          res.send(result.insertedCount)
       })
   })
 
@@ -52,7 +52,7 @@ client.connect(err => {
       const userEmail = req.params.email;
       registerListCollection.find({email: userEmail})
       .toArray((err, documents) => {
-          res.send(documents)
+          res.send(documents);
       })
   })
 
@@ -61,7 +61,7 @@ client.connect(err => {
     const id = req.params.id;
     registerListCollection.deleteOne({_id: objectId(req.params.id)})
     .then((result) =>{
-        res.send(result.deletedCount > 0)
+        res.send(result.deletedCount)
     })
   })
 
